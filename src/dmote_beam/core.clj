@@ -38,9 +38,9 @@
           (translate [0 0.5 1]
             (cube (dec width) plate-thickness plate-height))
           (cube width (dec plate-thickness) plate-height)))
-        (translate [0 (+ rd (- r1 (/ (dec plate-thickness) 2))) (+ brim 4)]
-          (rotate [0 (/ pi 2) 0]
-            (cylinder r1 width)))
+      (translate [0 (+ rd (- r1 (/ (dec plate-thickness) 2))) (+ brim 4)]
+        (rotate [0 (/ pi 2) 0]
+          (cylinder r1 width)))
       (apply union
         (for [divisor [-2 2]]
           (translate [(/ spacing divisor) 0 0]
@@ -61,11 +61,11 @@
        (cylinder (r d2) h)
        (translate separation
          (cylinder (r d2) h)))
-      (cylinder (r d0) h)
-      (translate separation
-        (cylinder (r d0) h)
-        (translate [0, 0, (/ h 4)]
-          (cylinder (r d1) (/ h 2)))))))
+     (cylinder (r d0) h)
+     (translate separation
+       (cylinder (r d0) h)
+       (translate [0, 0, (/ h 4)]
+         (cylinder (r d1) (/ h 2)))))))
 
 (defn author
   "Author SCAD."
