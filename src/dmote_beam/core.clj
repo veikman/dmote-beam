@@ -153,12 +153,14 @@
     "Distance between fasteners in the keyboard case back plate"
     :default 30
     :parse-fn #(Integer/parseInt %)]
-   ["-h" "--help"]])
+   ["-h" "--help" "Print this message"]])
 
 (defn -main
   [& raw]
   (let [args (parse-opts raw cli-options)]
-    (if (nil? (:errors args))
-      (author (:options args))
-      (do (println (:summary args))
-          (System/exit 1)))))
+    (if (get-in args [:options :help])
+      (println (:summary args))
+      (if (nil? (:errors args))
+        (author (:options args))
+        (do (println (:summary args))
+            (System/exit 1))))))
