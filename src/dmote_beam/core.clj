@@ -4,12 +4,10 @@
 (ns dmote-beam.core
   (:require [clojure.tools.cli :refer [parse-opts]]
             [scad-clj.scad :refer [write-scad]]
-            [scad-clj.model :exclude [use import] :refer :all]))
+            [scad-clj.model :exclude [use import] :refer :all]
+            [scad-tarmi.threaded :refer [datum]]))
 
 (def plate-thickness 6)
-
-(def socket-cap-diameter
-  {6 10})
 
 (defn beam-shape
   "An item in the shape of the beam."
@@ -91,7 +89,7 @@
          cd0 :case-fastener-diameter
          bd0 :beam-fastener-diameter
          thickness :beam-thickness} opts
-        cd1 (+ (socket-cap-diameter cd0) 0.4)
+        cd1 (+ (datum cd0 :socket-diameter ) 0.4)
         cd2 (* 2 cd0)
         bd1 (+ (* 2 thickness) bd0)
         bd2 (* 1.25 bd1)

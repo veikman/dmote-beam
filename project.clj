@@ -3,8 +3,8 @@
   :url "http://viktor.eikman.se"
   :license {:name "GPL"
             :url "https://www.gnu.org/licenses/gpl.html"}
-  :dependencies [[org.clojure/clojure "1.8.0"]
+  :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/tools.cli "0.3.7"]
-                 [unicode-math "0.2.0"]
-                 [scad-clj "0.5.2"]]
+                 [scad-clj "0.5.2"]
+                 [scad-tarmi "0.4.0"]]
   :main ^:skip-aot dmote-beam.core)
