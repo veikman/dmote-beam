@@ -144,11 +144,11 @@
     ;; So named because the beam can contain an actual threaded fastener.
     "Inner diameter of the beam itself"
     :default 6
-    :parse-fn #(Integer/parseInt %)]
+    :parse-fn #(Float/parseFloat %)]
    ["-t" "--beam-thickness DIAMETER"
     "Thickness of material in the beam, assuming it’s hollow"
     :default 1
-    :parse-fn #(Integer/parseInt %)]
+    :parse-fn #(Float/parseFloat %)]
    [nil "--spacing DISTANCE"
     "Distance between fasteners in the keyboard case back plate"
     :default 30
