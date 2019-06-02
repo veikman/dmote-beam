@@ -20,28 +20,24 @@
     :default #"" :parse-fn re-pattern]
    [nil "--square"
     "Square-profile beam; the default is a cylinder"]
-   ["-b" "--brim N"
-    "Size of the plate around the center of each fastener"
-    :default 8
-    :parse-fn #(Integer/parseInt %)]
-   [nil "--holder-thickness N"
-    "Width of funicular and clip models"
-    :default 6
-    :parse-fn #(Float/parseFloat %)]
    [nil "--holder-width N"
-    "Width of funicular and clip models"
+    "Width of funicular and clip models; thickness of plate"
     :default 15
-    :parse-fn #(Integer/parseInt %)]
+    :parse-fn #(Float/parseFloat %)]
+   [nil "--holder-thickness-factor N"
+    (str "A multiplier of beam diameter for the thickness of material "
+         "surrounding the beam or a threaded rod inside the beam")
+    :default 0.22
+    :parse-fn #(Float/parseFloat %)]
    ["-d" "--case-fastener-diameter N"
     "Size of each threaded fastener between beam holder and case"
     :default 6
     :parse-fn #(Integer/parseInt %)]
-   ["-D" "--beam-fastener-diameter N"
-    ;; So named because the beam can contain an actual threaded fastener.
-    "Inner diameter of the beam itself"
-    :default 6
+   [nil "--beam-diameter N"
+    "Outer diameter of the beam"
+    :default 15  ; Big enough to pass a 4P4C through and fold a wire inside.
     :parse-fn #(Float/parseFloat %)]
-   ["-t" "--beam-thickness N"
+   [nil "--beam-thickness N"
     "Thickness of material in the beam, assuming it’s hollow"
     :default 1
     :parse-fn #(Float/parseFloat %)]
@@ -54,7 +50,7 @@
   [{:keys [whitelist] :as options}]
   (let [roster [{:name "dmote-beam-clip",
                  :model-main (models/clip-model options)}
-                {:name "dmote-beam-plate-anchor",
+                {:name "dmote-beam-backplate-anchor",
                  :model-main (models/plate-anchor-model options)}
                 {:name "dmote-beam-funicular",
                  :model-main (models/funicular-model options)}]]
