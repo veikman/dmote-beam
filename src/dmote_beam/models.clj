@@ -7,7 +7,7 @@
             [scad-tarmi.threaded :as threaded]))
 
 (defn- basic-profile
-  "A 2D profile, completely round or with rounded corners."
+  "A basic 2D profile, as for the beam."
   [square diameter]
   (if square
     (model/square diameter diameter)
@@ -33,7 +33,7 @@
   DMOTE back plate, not a rear housing. This intended to hold not the beam
   itself but a threaded rod that runs through the beam (or is threaded into
   it), with a lock nut at one end of the anchor."
-  [{:keys [spacing holder-thickness-factor holder-width
+  [{:keys [backplate-spacing holder-thickness-factor holder-width
            beam-thickness beam-diameter case-fastener-diameter]
     :as opts}]
   (let [compensator (error-fn)
@@ -46,7 +46,7 @@
         anchor-radius (/ anchor-diameter 2)
         half-radius (/ anchor-radius 2)
         plate-height (+ bolt-head-diameter 2)  ; Clear bevelling.
-        plate-width (+ spacing plate-height)
+        plate-width (+ backplate-spacing plate-height)
         beam-displacement [0 anchor-radius (+ anchor-radius (/ plate-height 2))]]
     (model/difference
       (model/union
@@ -82,7 +82,7 @@
       ;; Spaces for screws:
       (apply model/union
         (for [divisor [-2 2]]
-          (model/translate [(/ spacing divisor) holder-width 0]
+          (model/translate [(/ backplate-spacing divisor) holder-width 0]
             (model/rotate [(/ π -2) 0 0]
               (case-fastener-negative opts compensator))))))))
 
@@ -117,7 +117,6 @@
   substitutes for both ‘plate-anchor-model’ and ‘funicular-model’."
   [{:keys [holder-width holder-thickness-factor case-fastener-diameter
            beam-diameter beam-thickness clip-spacing]
-    :or {clip-spacing 1}
     :as opts}]
   (let [offset (* holder-thickness-factor beam-diameter)
         clip-diameter (+ beam-diameter (* 2 offset))
@@ -142,7 +141,7 @@
       ;; to the keyboard case:
       (model/translate [0 sidecar 0]
         (model/union
-          (model/cube holder-width holder-width 1)  ; Slit for clamping.
+          (model/cube holder-width (+ holder-width clip-spacing 1) 1)  ; Slit.
           (model/translate [0 0 (/ clip-diameter 2)]
             (threaded/bolt :iso-size case-fastener-diameter
                            :head-type :socket

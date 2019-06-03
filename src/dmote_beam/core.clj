@@ -29,7 +29,7 @@
          "surrounding the beam or a threaded rod inside the beam")
     :default 0.22
     :parse-fn #(Float/parseFloat %)]
-   ["-d" "--case-fastener-diameter N"
+   [nil "--case-fastener-diameter N"
     "Size of each threaded fastener between beam holder and case"
     :default 6
     :parse-fn #(Integer/parseInt %)]
@@ -41,7 +41,11 @@
     "Thickness of material in the beam, assuming it’s hollow"
     :default 1
     :parse-fn #(Float/parseFloat %)]
-   [nil "--spacing N"
+   [nil "--clip-spacing N"
+    "Distance between the beam and the fastener as they pass through the clip"
+    :default 1
+    :parse-fn #(Float/parseFloat %)]
+   [nil "--backplate-spacing N"
     "Distance between fasteners in the keyboard case back plate"
     :default 30
     :parse-fn #(Integer/parseInt %)]])
