@@ -1,5 +1,5 @@
-(defproject dmote-beam "0.1.0-SNAPSHOT"
-  :description "Back beam model for the DMOTE keyboard"
+(defproject dmote-beam "0.1.0"
+  :description "Back beam supports for the DMOTE keyboard"
   :url "https://github.com/veikman/dmote-beam"
   :license {:name "EPL-2.0 OR GPL-3.0-or-later"
             :url "https://www.eclipse.org/legal/epl-2.0/"}
